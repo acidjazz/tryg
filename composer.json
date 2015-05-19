@@ -17,8 +17,7 @@
   },
   "autoload": {
     "psr-4": { 
-      "tryg\\": "src/tryg/",
-      "ctl\\": "example/ctl/"
+      "tryg\\": "src/tryg/"
     }
   },
   "require": {
