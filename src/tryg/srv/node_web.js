@@ -5,11 +5,6 @@
 
 var fs = require('fs');
 
-/*
-var nodepath = process.argv[2]
-var jade = require(nodepath + 'jade');
-var stylus = require(nodepath + 'stylus');
-*/
 
 var jade = require('jade');
 var stylus = require('stylus');

@@ -2,7 +2,6 @@
 
   "cfg": {
 
-    "path": "/var/www/tryg/example/",
     "tryg": {
       "path": "/var/www/tryg/src/tryg/",
       "stylus": "true",

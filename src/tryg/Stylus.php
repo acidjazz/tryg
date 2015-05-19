@@ -10,8 +10,7 @@ class Stylus {
 
     global $cfg;
 
-    $stamp = microtime(true);
-    $path = $cfg['path'].self::$stylusdir;
+    $path = $_SERVER['DOCUMENT_ROOT'].'/'.self::$stylusdir;
 
     if (!is_file($path.$stylus)) {
       $stylus = $stylus.'.styl';

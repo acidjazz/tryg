@@ -8,11 +8,9 @@ class Jade {
 
   public static function c($template, $array=array(), $return=false) {
 
-    $stamp = microtime(true);
-
     global $cfg;
 
-    $path = $cfg['path'].self::$templatedir;
+    $path = $_SERVER['DOCUMENT_ROOT'].'/'.self::$templatedir;
     $tryg = $cfg['tryg']['path'].self::$templatedir;
 
     $array['_c'] = $cfg;
