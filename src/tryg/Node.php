@@ -39,8 +39,7 @@ class Node  {
   }
 
   public static function startProcess() {
-    global $cfg;
-    exec('node '.$cfg['tryg']['path'].'srv/node_web.js > /dev/null 2>&1 &', $output, $return);
+    exec('node '.__DIR__.'/srv/node_web.js > /dev/null 2>&1 &', $output, $return);
     sleep(1);
   }
 

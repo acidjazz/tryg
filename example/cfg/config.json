@@ -3,7 +3,6 @@
   "cfg": {
 
     "tryg": {
-      "path": "/var/www/tryg/src/tryg/",
       "stylus": "true",
       "Debug": {
         "debug": "true",
