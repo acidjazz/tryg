@@ -1,0 +1,20 @@
+{
+  "name": "tryg",
+  "version": "1.0.0",
+  "description": "Minimal PHP Framework",
+  "main": "index.php",
+  "dependencies": {
+    "jade": "*",
+    "stylus": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/acidjazz/tryg.git"
+  },
+  "author": "Kevin Olson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acidjazz/tryg/issues"
+  },
+  "homepage": "https://github.com/acidjazz/tryg"
+}

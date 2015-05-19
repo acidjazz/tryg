@@ -1,0 +1,27 @@
+{
+  "name": "acidjazz/tryg",
+  "type": "library",
+  "description": "Minimal PHP Framework",
+  "keywords": ["Minimal", "PHP", "Framework"],
+  "homepage": "https://github.com/acidjazz/tryg",
+  "license": "MIT",
+  "authors": [{
+    "name": "Kevin Olson",
+    "email": "acidjazz@gmail.com",
+    "role": "Developer"
+  }],
+  "support": {
+    "issues": "https://github.com/acidjazz/tryg/issues",
+    "irc": "irc://irc.gitter.im/acidjazz/tryg",
+    "gitter": "https://gitter.im/acidjazz/tryg"
+  },
+  "autoload": {
+    "psr-4": { 
+      "tryg\\": "src/tryg/",
+      "ctl\\": "example/ctl/"
+    }
+  },
+  "require": {
+    "php": ">=5.4"
+  }
+}

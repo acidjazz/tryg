@@ -1,0 +1,10 @@
+
+.DS_Store
+Thumbs.db
+vendor
+node_modules
+*.swp
+
+# ommit composer.lock for type: library, otherwise commit it
+composer.lock
+
