@@ -1,3 +1,3 @@
-# Tryg
+# tryg
 Minimal PHP framework
 
