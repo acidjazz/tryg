@@ -20,6 +20,7 @@ Class Api extends \tryg\Aphpi {
     switch ($method) {
 
       // public methods
+      case 'index' :
       case 'login' :
         call_user_func_array([$this, '_'.$method], []);
         break;
@@ -41,6 +42,10 @@ Class Api extends \tryg\Aphpi {
 
     }
 
+  }
+
+  private function _index() {
+    return $this->result(true, 'Index Endpoint Successful', ['Welcome to Tryg']);
   }
 
   private function _login() {

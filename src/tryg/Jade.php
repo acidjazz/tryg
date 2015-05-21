@@ -43,10 +43,10 @@ class Jade {
     if ($result['status'] == 500) {
 
       if (preg_match('/on line ([0-9]+)/i', $result['data'], $matches)) {
-        Debug::handler(E_ERROR, '<b>[Jade]</b> '.$result['data'], $path.$template, $matches[1]);
+        Debug::handler(E_ERROR, '[Jade] '.$result['data'], $path.$template, $matches[1]);
       } elseif (preg_match('/^(.*?):([0-9]+)/i', $result['data'], $matches)) {
         $lines = explode("\n", trim($result['data']));
-        Debug::handler(E_ERROR, '<b>[Jade]</b> '.end($lines), $matches[1], $matches[2]);
+        Debug::handler(E_ERROR, '[Jade] '.end($lines), $matches[1], $matches[2]);
       } else {
         trigger_error("<b>[Jade]</b> compilation error: <pre>".$result['data']."</pre>");
       }

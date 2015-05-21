@@ -86,7 +86,6 @@ class Debug {
 
     }
 
-
     $lines = explode('<br />', highlight_file($file, true));
 
     $code = [];

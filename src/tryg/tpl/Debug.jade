@@ -5,16 +5,31 @@ html(lang='en')
     title tryg::Debug errors (#{self.errors.length})
 
     style(type='text/css').
+      body { font-size: 14px; }
       .kdb  { font-family: Verdana; font-weight: normal; font-size: 14px; }
-      .kdb_error { background-color: #f75d5d; color: #fff; margin: 0.5em; overflow: hidden; }
-      .kdb_toggle { background-color: #f9b3b3; width: 1.2em; padding: 0.5em; margin: 0.5em; float: right; }
+      .kdb_error { background-color: #f75d5d; color: #fff; margin: 0.5em; overflow: hidden; border: 0.1em solid #f75d5d; }
+      .kdb_toggle { position: relative; background-color: #f9b3b3; width: 1.1em; padding: 0.5em; margin: 0.5em; float: right; height: 1.1em; }
+      .kdb_toggle > .arrow { 
+        position: absolute; 
+        width 0; 
+        height 0; 
+        top: 0.7em; 
+        left: 0.3em; 
+        border-left: 0.75em solid transparent; 
+        border-right: 0.75em solid transparent;
+        border-top: 0.75em solid #f75d5d;
+        transition: 0.2s transform ease-in-out;
+      }
+
+      .kdb_toggle > .arrow.down { transform: rotate(0deg); }
+      .kdb_toggle > .arrow.up { transform: rotate(180deg); }
       .kdb_header { cursor: pointer; }
       .kdb_type { float: left; width: 110px; text-align: center; background-color: #f9b3b3; padding: 1em 0.5em; color: #f75d5d; font-weight: bold; }
       .kdb_name { padding: 1em; margin-left: 120px; }
       .kdb_body { transition: max-height 0.2s; -webkit-transition: max-height 0.2s; } 
       .kdb_body.off { max-height: 0em; }
       .kdb_body.on { max-height: 34em; }
-      .kdb_file { font-size: 14px; float: right; padding: 0.4em; border: 1px solid white; margin-top: 0.5em; width: 200px; }
+      .kdb_file { font-size: 14px; float: right; padding: 0.4em; border: 1px solid white; margin-top: 0.5em; width: 300px; }
       .kdb_lines { background-color: #fff; color: #666; margin: 0 0.5em 0.5em 0.5em; clear: both; }
       .kdb_num { float: left; width: 20px; height: 15px; text-align: right; padding: 0.5em; border-right: 1px solid #ccc; }
       .kdb_codefont { font-family: "Lucida Console", Monaco, monospace; }
@@ -30,7 +45,8 @@ html(lang='en')
       for error, i in self.errors
         .kdb_error
           .kdb_header
-            .kdb_toggle &nbsp;
+            .kdb_toggle
+              .arrow.down
             input.kdb_file(type='text',value='vi '+error.file.replace(self._c.path, '') + ' +' +error.line)
             .kdb_type #{error.type}
             .kdb_name !{error.error}
@@ -51,6 +67,12 @@ html(lang='en')
       }
 
       var body = e.currentTarget.nextSibling.nextSibling;
+      var par = body.parentNode;
+      arrow = par.children[0].children[0].children[0];
+
+      arrow.classList.toggle('down');
+      arrow.classList.toggle('up');
+
       body.classList.toggle('off');
       body.classList.toggle('on');
 
@@ -58,7 +80,9 @@ html(lang='en')
 
     function kdb_copy(e) {
       var t = e.target;
-      t.setSelectionRange(0, t.value.length);
+      if (t.target !== undefined) {
+        t.setSelectionRange(0, t.value.length);
+      }
     }
 
     var headers = document.getElementsByClassName("kdb_header");
