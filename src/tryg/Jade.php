@@ -13,7 +13,7 @@ class Jade {
     $path = $_SERVER['DOCUMENT_ROOT'].self::$templatedir;
     $tryg = __DIR__.self::$templatedir;
 
-    $array['_c'] = $cfg;
+    $array['c'] = $cfg;
     $array['pretty'] = true;
     $array['self'] = true;
 

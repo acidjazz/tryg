@@ -2,8 +2,11 @@
 
   "cfg": {
 
+    "meta": {
+      "title": "Tryg Framework"
+    },
+
     "tryg": {
-      "stylus": "true",
       "Debug": {
         "debug": "true",
         "handler": "true"

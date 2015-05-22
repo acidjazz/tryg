@@ -24,6 +24,7 @@ class Stylus {
     $options = [];
     $options['paths'] = [$path];
     $options['filename'] = $path.$stylus;
+    $options['cfg'] = $cfg;
 
     $data = file_get_contents($path.$stylus);
 

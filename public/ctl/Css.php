@@ -2,7 +2,7 @@
 
 namespace ctl;
 
-class Style {
+class Css {
 
   public function __call($function, $arguments) {
     $this->index(substr($function, 0, -4));
@@ -10,9 +10,7 @@ class Style {
 
   public function index($file='main') {
 
-    global $cfg;
-
-    if (preg_match('/^[a-z]+$/', $file) && is_file($cfg['path'].'sty/'.$file.'.styl')) {
+    if (preg_match('/^[a-z]+$/', $file) && is_file(__DIR__.'/../sty/'.$file.'.styl')) {
 
       if (!$css = \tryg\Stylus::c($file, true)) {
         Header('Content-type: text/html');

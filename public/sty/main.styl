@@ -1,13 +1,29 @@
 
+vendor-prefixes ?= webkit moz o ms official
+
+@import vendor
+@import guide
+
 body
   margin 0
   padding 0
-  background-color white
+  background-color c_grey1
   color black
   font-size 20px
+  font-family cfg
 
 .header
   padding 20px
   text-align center
+  background-color c_white
   font-size 2em
+  > span
+    color c_blue1
+    animation vendortest 1s 0s linear both infinite alternate
 
+@keyframes vendortest
+
+  from
+    color c_blue1
+  to
+    color c_blue2
