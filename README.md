@@ -1,12 +1,12 @@
-# tryg
-Minimal PHP framework
 
+# tryg
+Minimal PHP framework with some interesting features
 
 
 ## installation
 
-1. Install (Composer)[https://getcomposer.org/]
-2. Install the (Packagist)[https://packagist.org/packages/acidjazz/tryg]
+1. Install [Composer](https://getcomposer.org/)
+2. Install the [Packagist](https://packagist.org/packages/acidjazz/tryg)
 ```bash
 php ~/composer.phar require acidjazz/tryg
 3. Copy the bundled setup template
