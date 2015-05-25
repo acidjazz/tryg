@@ -1,6 +1,8 @@
 
 # tryg
-Minimal PHP/node MVC framework 
+A Minimal PHP/node MVC framework 
+
+### features
 
 * Advanced debugger
 ![debugger](media/debugger.png)
@@ -10,8 +12,12 @@ Minimal PHP/node MVC framework
 * API endpoint assistance
 * Much more I will list later
 
+### what?
 
-## installation
+tryg is a minimal PHP framework named after (Trygve Reenskaug)[http://en.wikipedia.org/wiki/Trygve_Reenskaug], the inventor of the MVC structure.
+tryg uses Jade for templating and Stylus for CSS preprocessing, but instead of porting their functionality, tryg uses their API's with sockets.
+
+### installation
 
 1. Install [Composer](https://getcomposer.org/)
 2. Install the specified [Packagist](https://packagist.org/packages/acidjazz/tryg) _acidjazz/tryg_
