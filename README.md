@@ -1,12 +1,12 @@
 # tryg
 
-[![Join the chat at https://gitter.im/acidjazz/tryg](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/acidjazz/tryg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A Minimal PHP/node MVC framework 
 
 [![Latest Stable Version](https://poser.pugx.org/acidjazz/tryg/v/stable)](https://packagist.org/packages/acidjazz/tryg)
 [![Total Downloads](https://poser.pugx.org/acidjazz/tryg/downloads)](https://packagist.org/packages/acidjazz/tryg)
 [![Latest Unstable Version](https://poser.pugx.org/acidjazz/tryg/v/unstable)](https://packagist.org/packages/acidjazz/tryg)
 [![License](https://poser.pugx.org/acidjazz/tryg/license)](https://packagist.org/packages/acidjazz/tryg)
+[![Join the chat at https://gitter.im/acidjazz/tryg](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/acidjazz/tryg?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ### features
 
