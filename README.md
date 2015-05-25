@@ -1,5 +1,4 @@
-![tryg](media/tryg.png)
-# tryg
+# ::tryg
 A Minimal PHP/node MVC framework 
 
 ### features
