@@ -1,6 +1,11 @@
 # tryg
 A Minimal PHP/node MVC framework 
 
+[![Latest Stable Version](https://poser.pugx.org/acidjazz/tryg/v/stable)](https://packagist.org/packages/acidjazz/tryg)
+[![Total Downloads](https://poser.pugx.org/acidjazz/tryg/downloads)](https://packagist.org/packages/acidjazz/tryg)
+[![Latest Unstable Version](https://poser.pugx.org/acidjazz/tryg/v/unstable)](https://packagist.org/packages/acidjazz/tryg)
+[![License](https://poser.pugx.org/acidjazz/tryg/license)](https://packagist.org/packages/acidjazz/tryg)
+
 ### features
 
 * Visual debugger
