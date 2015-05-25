@@ -1,10 +1,10 @@
-
+![tryg](media/tryg.png)
 # tryg
 A Minimal PHP/node MVC framework 
 
 ### features
 
-* Advanced debugger
+* Visual debugger
 ![debugger](media/debugger.png)
 * Complete [Jade](https://github.com/jadejs/jade) support
 * Complete [Stylus](https://github.com/stylus/stylus) support
@@ -15,7 +15,7 @@ A Minimal PHP/node MVC framework
 ### what?
 
 tryg is a minimal PHP framework named after [Trygve Reenskaug](http://en.wikipedia.org/wiki/Trygve_Reenskaug), the inventor of the MVC structure.
-tryg uses Jade for templating and Stylus for CSS preprocessing, but instead of porting their functionality, tryg uses their API's with sockets.
+tryg uses Jade for templating and Stylus for CSS preprocessing, but instead of porting their functionality, tryg uses the native versions of via their API and a socket connection.
 
 ### installation
 
