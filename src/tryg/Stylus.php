@@ -10,7 +10,7 @@ class Stylus {
 
     global $cfg;
 
-    $path = $_SERVER['DOCUMENT_ROOT'].'/../'.self::$stylusdir;
+    $path = $_SERVER['DOCUMENT_ROOT'].'/..'.self::$stylusdir;
 
     if (!is_file($path.$stylus)) {
       $stylus = $stylus.'.styl';

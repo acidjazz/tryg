@@ -10,7 +10,7 @@ class Jade {
 
     global $cfg;
 
-    $path = $_SERVER['DOCUMENT_ROOT'].'/../'.self::$templatedir;
+    $path = $_SERVER['DOCUMENT_ROOT'].'/..'.self::$templatedir;
     $tryg = __DIR__.self::$templatedir;
 
     $array['c'] = $cfg;
