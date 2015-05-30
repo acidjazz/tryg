@@ -4,7 +4,7 @@ namespace tryg;
 
 class Jade {
 
-  public static $templatedir = '/tpl/';
+  public static $templatedir = '/../tpl/';
 
   public static function c($template, $array=array(), $return=false) {
 

@@ -4,7 +4,7 @@ namespace tryg;
 
 class Stylus {
 
-  public static $stylusdir = '/sty/';
+  public static $stylusdir = '/../sty/';
 
   public static function c($stylus, $return=false) {
 

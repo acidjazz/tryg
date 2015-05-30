@@ -32,24 +32,24 @@ php ~/composer.phar require acidjazz/tryg
 ```
 3. Copy the bundled setup template
 ```bash
-cp -rp vendor/acidjazz/tryg/public .
+cp -rp vendor/acidjazz/tryg/site .
 ```
 4. Copy the provided package.json to install the required node modules, then use *npm* to install them
 ```bash
 cp -rp vendor/acidjazz/tryg/package.json .
 npm install
 ```
-5. Point your web server to the public/ folder you've copied as the root, you're done!
+5. Point your web server to the site/pub/ folder you've copied as the root, you're done!
 
 ### Nginx setup
 
-Replace `/var/www/tryg/public` with the location of your setup template 
+Replace `/var/www/tryg/site/pub` with the location of your setup template 
 
 ```nginx
 server {
 
 	listen 80;
-	root /var/www/tryg/public;
+	root /var/www/tryg/site/pub;
 	index index.php;
 	server_name tryg;
 
@@ -91,5 +91,5 @@ RewriteRule ^(.*)$ index.php
 
 refresh our test setup using tryg as a vendor
 ```bash
-sudo pkill node;php ~/composer.phar update;rm -rf public/; cp -rp vendor/acidjazz/tryg/public/ public
+sudo pkill node;php ~/composer.phar update;rm -rf site/pub/; cp -rp vendor/acidjazz/tryg/site/ site
 ```
