@@ -12,3 +12,4 @@ date_default_timezone_set($cfg['tryg']['timezone']);
 function hpr() { return call_user_func_array(['\tryg\Debug', 'hpr'], func_get_args()); }
 
 (new tryg\Controller($_SERVER['REQUEST_URI']))->start();
+

@@ -4,13 +4,13 @@ namespace tryg;
 
 class Jade {
 
-  public static $templatedir = '/../tpl/';
+  public static $templatedir = '/tpl/';
 
   public static function c($template, $array=array(), $return=false) {
 
     global $cfg;
 
-    $path = $_SERVER['DOCUMENT_ROOT'].self::$templatedir;
+    $path = $_SERVER['DOCUMENT_ROOT'].'/../'.self::$templatedir;
     $tryg = __DIR__.self::$templatedir;
 
     $array['c'] = $cfg;

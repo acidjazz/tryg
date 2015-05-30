@@ -4,13 +4,13 @@ namespace tryg;
 
 class Stylus {
 
-  public static $stylusdir = '/../sty/';
+  public static $stylusdir = '/sty/';
 
   public static function c($stylus, $return=false) {
 
     global $cfg;
 
-    $path = $_SERVER['DOCUMENT_ROOT'].self::$stylusdir;
+    $path = $_SERVER['DOCUMENT_ROOT'].'/../'.self::$stylusdir;
 
     if (!is_file($path.$stylus)) {
       $stylus = $stylus.'.styl';
