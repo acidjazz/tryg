@@ -6,6 +6,8 @@
       "title": "Tryg Framework"
     },
 
+    "timeozne": "UTC",
+
     "tryg": {
       "Debug": {
         "debug": "true",
