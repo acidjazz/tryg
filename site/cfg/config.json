@@ -6,9 +6,9 @@
       "title": "Tryg Framework"
     },
 
-    "timeozne": "UTC",
 
     "tryg": {
+      "timeozne": "UTC",
       "Debug": {
         "debug": "true",
         "handler": "true"
