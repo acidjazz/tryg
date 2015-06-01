@@ -21,7 +21,7 @@ A Minimal PHP/node MVC framework
 ### what?
 
 tryg is a minimal PHP framework named after [Trygve Reenskaug](http://en.wikipedia.org/wiki/Trygve_Reenskaug), the inventor of the MVC structure.
-tryg uses Jade for templating and Stylus for CSS preprocessing, but instead of porting their functionality, tryg uses the native versions of via their API and a socket connection.
+tryg uses Jade for templating and Stylus for CSS preprocessing, their native versions via sockets.
 
 ### installation
 
