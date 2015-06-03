@@ -2,9 +2,9 @@
 
 /* mongoDB simple active record layer */
 
-namespace cune\clb;
+namespace tryg;
 
-class kcol {
+class Model {
 
   private static $_col = array();
   private static $_db = false;
@@ -96,6 +96,7 @@ class kcol {
       }
 
       self::$_db = $mongo->{$dbinfo['db']};
+
 
     }
 
