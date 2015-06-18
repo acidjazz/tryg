@@ -106,7 +106,7 @@ class Debug {
       'code' => $code
     ];
 
-    hpr($error);
+    //hpr($error);
 
     self::$errors[] =  $error;
 

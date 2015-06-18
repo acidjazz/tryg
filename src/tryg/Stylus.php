@@ -8,7 +8,6 @@ class Stylus {
 
   public static function c($stylus, $return=false) {
 
-    global $data;
 
     $path = \tryg\Debug::rootPath().self::$stylusdir;
 
@@ -20,6 +19,8 @@ class Stylus {
       trigger_error('Stylus not found: "'.$path.$stylus.'"');
       return false;
     }
+
+    global $data;
 
     $options = [];
     $options['paths'] = [$path];

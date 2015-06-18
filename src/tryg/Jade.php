@@ -14,7 +14,7 @@ class Jade {
 
     $tryg = __DIR__.self::$templatedir;
 
-    $array['c'] = $data;
+    $array = $data;
     $array['path'] = \tryg\Debug::rootPath();
     $array['pretty'] = true;
     $array['self'] = true;
