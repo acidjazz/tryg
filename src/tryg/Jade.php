@@ -8,13 +8,14 @@ class Jade {
 
   public static function c($template, $array=array(), $return=false) {
 
-    global $cfg;
+    global $data;
 
-    $path = substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/')).self::$templatedir;
+    $path = \tryg\Debug::rootPath().self::$templatedir;
 
     $tryg = __DIR__.self::$templatedir;
 
-    $array['c'] = $cfg;
+    $array['c'] = $data;
+    $array['path'] = \tryg\Debug::rootPath();
     $array['pretty'] = true;
     $array['self'] = true;
 

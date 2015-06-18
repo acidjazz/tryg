@@ -1,0 +1,16 @@
+{
+
+  "meta": {
+    "title": "Tryg Framework"
+  },
+
+  "tryg": {
+    "timezone": "UTC",
+    "Debug": {
+      "debug": "true",
+      "handler": "true"
+    }
+
+  }
+
+}

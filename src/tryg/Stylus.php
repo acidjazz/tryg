@@ -8,9 +8,9 @@ class Stylus {
 
   public static function c($stylus, $return=false) {
 
-    global $cfg;
+    global $data;
 
-    $path = substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/')).self::$stylusdir;
+    $path = \tryg\Debug::rootPath().self::$stylusdir;
 
     if (!is_file($path.$stylus)) {
       $stylus = $stylus.'.styl';
@@ -24,7 +24,7 @@ class Stylus {
     $options = [];
     $options['paths'] = [$path];
     $options['filename'] = $path.$stylus;
-    $options['cfg'] = $cfg;
+    $options['data'] = $data;
 
     $data = file_get_contents($path.$stylus);
 

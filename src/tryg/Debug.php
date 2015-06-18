@@ -106,7 +106,7 @@ class Debug {
       'code' => $code
     ];
 
-    //hpr($error);
+    hpr($error);
 
     self::$errors[] =  $error;
 
@@ -125,19 +125,54 @@ class Debug {
 
   }
 
-  // define configuration variables from a JSON file
-  public static function def($arr, $lead='') {
-    $GLOBALS['cfg'] = $arr;
-    /*
-    foreach ($arr as $key=>$value) {
-      if (is_array($value)) {
-        self::def($value, ($lead != '' ? $lead.'_' : '').$key);
-      } else {
-        define(strtoupper($lead.( ($lead != '') ? '_' : '').$key), $value);
-      }
-    }
-     */
+  public static function def($data) {
+    $GLOBALS['data'] = $data;
+  }
 
+  public static function rootPath() {
+    $path = substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/'));
+    return $path;
+  }
+
+  // slurp a bunch of json and yaml from a directory
+  //
+  public static function slurp($path, $content=[]) {
+
+    foreach(scandir($path) as $file) {
+
+      if (in_array($file, ['.','..'])) {
+        continue;
+      }
+
+      if (is_dir($path.$file)) {
+        $newpath = $path.$file.'/';
+        $content[$file] = self::slurp($newpath, []);
+        continue;
+      }
+
+      list($name, $ext) = explode('.', $file);
+
+      if (in_array($ext, ['json','jsn'])) {
+
+        $parsed = json_decode(file_get_contents($path.$file), true);
+
+        if ($parsed == null) {
+          self::handler(E_USER_NOTICE, 'Error parsing JSON', $path.$file, 4);
+          return false;
+        } else {
+          $content[$name] = $parsed;
+        }
+
+      }
+
+      if (in_array($ext, ['yaml','yml'])) {
+        $parsed = yaml_parse_file($path.$file);
+        $content[$name] = $parsed;
+      }
+
+    }
+
+    return $content;
   }
 
   public static function hpr($obj, $return=false) {
