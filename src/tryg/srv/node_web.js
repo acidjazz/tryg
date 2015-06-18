@@ -43,7 +43,7 @@ http.createServer(function(req, res) {
 
     if (post.module == 'stylus') {
 
-      stylus(post.data, post.options).define('cfg', post.options.cfg).render(function(error, output) {
+      stylus(post.data, post.options).define('d', post.options.data, true).render(function(error, output) {
 
         if (error) {
           res.writeHead(500, {'Content-Type': 'text/html'});
