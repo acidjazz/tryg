@@ -60,19 +60,19 @@ class Model {
   }
 
   public static function getcol() {
-    $class = get_called_class();
+    $class = strtolower(get_called_class());
     return substr($class, strrpos($class, '\\') + 1);
   }
 
   public static function getdb() {
 
-    global $cfg;
+    global $data;
 
-    if (isset($cfg['mongo']['db'])) {
-      return $cfg['mongo'];
+    if (isset($data['mongo']['db'])) {
+      return $data['mongo'];
     }
 
-    foreach ($cfg['mongo'] as $key=>$db) {
+    foreach ($data['mongo'] as $key=>$db) {
 
       if (in_array(self::getcol(), $db['cols'])) {
         return $db;
@@ -120,19 +120,18 @@ class Model {
   }
 
   public function __get($name) {
-
-    if (isset($this->_data[$name])) {
+    if (array_key_exists($name, $this->_data)) {
       return $this->_data[$name];
     }
   }
 
   public function __isset($name) {
-    return isset($this->_data[$name]);
+    return array_key_exists($name, $this->_data);
   }
 
   public function __unset($name) {
 
-    if (isset($this->_data[$name])) {
+    if (array_key_exists($name, $this->_data)) {
       unset($this->_data[$name]);
       return true;
     }
@@ -208,18 +207,14 @@ class Model {
 
   }
 
-  public function data($rawid=false) {
+  public function data($ols=true) {
 
     $data = $this->_data;
 
-    if (isset($this->_ols) && is_array($this->_ols)) {
+    if ($ols === true && isset($this->_ols) && is_array($this->_ols)) {
       foreach ($this->_ols as $ol) {
         $data[$ol] = $this->$ol;
       }
-    }
-
-    if ($rawid) {
-      $data['_id'] = $data['_id']->{'$id'};
     }
 
     return $data;
