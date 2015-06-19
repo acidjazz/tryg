@@ -1,12 +1,121 @@
 <?
 
-namespace cune\clb;
+namespace tryg;
 
-class listing {
+class Listing {
 
   public $errors = [];
+  public $options = [];
+  public $filters = [];
 
-  public function filters($data) {
+  protected $model = false;
+  private $class = false;
+
+  public $total = false;
+  public $count = false;
+
+  public $sortable = [];
+  public $filterable = [];
+
+  public function __construct() {
+    $this->class = '\mdl\\'.$this->model;
+  }
+
+  public function get($query=[], $sort=[], $limit=50, $skip=0) {
+
+    $model = '\mdl\\'.$this->model;
+
+    if ($limit == 1) {
+      return (new $model($model::findOne($query)))->data();
+    }
+
+    $all = $model::find($query)->sort($sort);
+    $this->total = $all->count();
+    $cursor = $all->skip($skip)->limit($limit);
+
+    $docs = [];
+    foreach ($cursor as $doc) {
+      $modeled = new $model($doc);
+      $docs[$modeled->id(true)] = $modeled->data();
+    }
+
+    $this->count = count($docs);
+
+    return $docs;
+
+  }
+
+  public function browse($params) {
+
+    $sort = $query = [];
+    $skip = 0;
+    $order = -1;
+    $page = 1;
+
+    if (isset($params['order']) && $params['order'] == 'asc') {
+      $order = 1;
+    }
+
+    if (isset($params['sort'])) {
+
+      if (!in_array($params['sort'], array_keys($this->sortable))) {
+        $this->errors = ['type' => 'sort', 'error' => 'Invalid sorting parameter'];
+        return false;
+      }
+
+      $sort = [$this->sortable[$params['sort']] => $order];
+
+    }
+
+    if (false === ($this->filters = $this->filterMatch($params))) {
+      return false;
+    }
+
+    if (isset($params['page']) && is_numeric($params['page'])) {
+      $page = $params['page'];
+      $skip = $page <= 1 ? 0 : $this->limit * ($page-1);
+    }
+
+    $query = $this->filterRegex($query);
+
+    $result = $this->get($query, $sort, $this->limit, $skip);
+
+    $this->options = [
+      'filterable' => $this->filterable,
+      'filters' => $this->filters,
+      'query' => $query,
+      'sort' => $sort,
+      'limit' => $this->limit,
+      'total' => $this->total,
+      'count' => $this->count,
+      'skip' => $skip,
+      'page' => $page,
+      'paginate' => self::paginate($page, $this->total, $this->limit)
+    ];
+
+    return $result;
+
+  }
+
+  public function filterRegex($query) {
+
+    foreach ($this->filterable['regex'] as $name=>$field) {
+
+      if (isset($this->filters[$name])) {
+        $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
+        foreach ($filters as $filter) {
+          $regex = new \MongoRegex('/'.preg_quote($filter).'/i');
+          $query['$and'][][$field] = ['$regex' => $regex];
+        }
+      }
+
+    }
+
+    return $query;
+
+  }
+
+  public function filterMatch($data) {
 
     $filters = [];
 
@@ -78,6 +187,5 @@ class listing {
     ];
 
   }
-
 
 }
