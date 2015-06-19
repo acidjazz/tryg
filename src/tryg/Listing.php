@@ -36,7 +36,7 @@ class Listing {
     $docs = [];
     foreach ($cursor as $doc) {
       $modeled = new $model($doc);
-      $docs[$modeled->id(true)] = $modeled->data();
+      $docs[$modeled->id(true)] = $modeled->data(false);
     }
 
     $this->count = count($docs);
@@ -67,7 +67,7 @@ class Listing {
 
     }
 
-    if (false === ($this->filters = $this->filterMatch($params))) {
+    if (false === ($this->filters = $this->filterCompile($params))) {
       return false;
     }
 
@@ -77,6 +77,7 @@ class Listing {
     }
 
     $query = $this->filterRegex($query);
+    $query = $this->filterIs($query);
 
     $result = $this->get($query, $sort, $this->limit, $skip);
 
@@ -115,12 +116,27 @@ class Listing {
 
   }
 
-  public function filterMatch($data) {
+  public function filterIs($query) {
+
+    foreach ($this->filterable['is'] as $name=>$field) {
+
+      if (isset($this->filters[$name])) {
+        $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
+        foreach ($filters as $filter) {
+          $query['$and'][][$field] = $filter;
+        }
+      }
+    }
+
+    return $query;
+
+  }
+
+  public function filterCompile($data) {
 
     $filters = [];
 
     for ($i = 1; $i != 100; $i++) {
-
 
       if (isset($data['filter'.$i])) {
 
