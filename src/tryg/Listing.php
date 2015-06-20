@@ -8,6 +8,8 @@ class Listing {
   public $options = [];
   public $filters = [];
 
+  public $corrine = false;
+
   protected $model = false;
   private $class = false;
 
