@@ -68,11 +68,11 @@ class Model {
 
     global $data;
 
-    if (isset($data['mongo']['db'])) {
-      return $data['mongo'];
+    if (isset($data['auth']['mongo']['db'])) {
+      return $data['auth']['mongo'];
     }
 
-    foreach ($data['mongo'] as $key=>$db) {
+    foreach ($data['auth']['mongo'] as $key=>$db) {
 
       if (in_array(self::getcol(), $db['cols'])) {
         return $db;
