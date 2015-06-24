@@ -58,6 +58,10 @@ class Listing {
       $order = 1;
     }
 
+    if (isset($params['limit']) && is_numeric($params['limit']) && $params['limit'] <= $this->max) {
+      $this->limit = (int) $params['limit'];
+    }
+
     if (isset($params['sort'])) {
 
       if (!in_array($params['sort'], array_keys($this->sortable))) {
@@ -102,6 +106,10 @@ class Listing {
 
   public function filterRegex($query) {
 
+    if (!isset($this->filterable['regex'])) {
+      return $query;
+    }
+
     foreach ($this->filterable['regex'] as $name=>$field) {
 
       if (isset($this->filters[$name])) {
@@ -119,6 +127,10 @@ class Listing {
   }
 
   public function filterIs($query) {
+
+    if (!isset($this->filterable['is'])) {
+      return $query;
+    }
 
     foreach ($this->filterable['is'] as $name=>$field) {
 
