@@ -140,7 +140,8 @@ class Debug {
 
     foreach(scandir($path) as $file) {
 
-      if (in_array($file, ['.','..'])) {
+      // ignore previosu dir pointers and _ (example dirs/files)
+      if (in_array($file, ['.','..']) || $file{0} == '_') {
         continue;
       }
 

@@ -6,10 +6,10 @@ namespace tryg;
 
 class Model {
 
-  private static $_col = array();
+  private static $_col = [];
   private static $_db = false;
   private static $_grid = false;
-  private $_data = array();
+  private $_data = [];
 
   public $_exists = false;
 
@@ -120,13 +120,13 @@ class Model {
   }
 
   public function __get($name) {
-    if (array_key_exists($name, $this->_data)) {
+    if (is_array($this->_data) && array_key_exists($name, $this->_data)) {
       return $this->_data[$name];
     }
   }
 
   public function __isset($name) {
-    return array_key_exists($name, $this->_data);
+    return is_array($this->_data) && array_key_exists($name, $this->_data);
   }
 
   public function __unset($name) {
