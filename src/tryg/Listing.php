@@ -84,6 +84,8 @@ class Listing {
 
     $query = $this->filterRegex($query);
     $query = $this->filterIs($query);
+    $query = $this->filterIn($query);
+    $query = $this->filterExists($query);
 
     $result = $this->get($query, $sort, $this->limit, $skip);
 
@@ -138,6 +140,45 @@ class Listing {
         $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
         foreach ($filters as $filter) {
           $query['$and'][][$field] = $filter;
+        }
+      }
+    }
+
+    return $query;
+
+  }
+
+  public function filterIn($query) {
+
+    if (!isset($this->filterable['in'])) {
+      return $query;
+    }
+
+    foreach ($this->filterable['in'] as $name=>$field) {
+
+      if (isset($this->filters[$name])) {
+        $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
+        $query['$and'][][$field] = ['$in' => $filters];
+      }
+    }
+
+    return $query;
+
+  }
+
+
+  public function filterExists($query) {
+
+    if (!isset($this->filterable['exists'])) {
+      return $query;
+    }
+
+    foreach ($this->filterable['exists'] as $name=>$field) {
+
+      if (isset($this->filters[$name])) {
+        $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
+        foreach ($filters as $filter) {
+          $query['$and'][][$field.'.'.$filter] = ['$exists' => true];
         }
       }
     }
