@@ -47,7 +47,8 @@ html(lang='en')
           .kdb_header
             .kdb_toggle
               .arrow.down
-            input.kdb_file(type='text',value='vi '+error.file.replace(self.path, '') + ' +' +error.line)
+            if error.file
+              input.kdb_file(type='text',value='vi '+error.file.replace(self.path, '') + ' +' +error.line)
             .kdb_type #{error.type}
             .kdb_name !{error.error}
           .kdb_body.off
