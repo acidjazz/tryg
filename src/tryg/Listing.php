@@ -7,6 +7,7 @@ class Listing {
   public $errors = [];
   public $options = [];
   public $filters = [];
+  public $searches = [];
 
   public $corrine = false;
 
@@ -77,11 +78,16 @@ class Listing {
       return false;
     }
 
+    if (false === ($this->searches = $this->searchCompile($params))) {
+      return false;
+    }
+
     if (isset($params['page']) && is_numeric($params['page'])) {
       $page = $params['page'];
       $skip = $page <= 1 ? 0 : $this->limit * ($page-1);
     }
 
+    $query = $this->search($query);
     $query = $this->filterRegex($query);
     $query = $this->filterIs($query);
     $query = $this->filterIn($query);
@@ -103,6 +109,19 @@ class Listing {
     ];
 
     return $result;
+
+  }
+
+  public function search($query) {
+
+    foreach ($this->searches as $search) {
+      foreach ($this->searchable as $field) {
+        $regex = new \MongoRegex('/'.preg_quote($search).'/i');
+        $query['$or'][][$field] = ['$regex' => $regex];
+      }
+    }
+
+    return $query;
 
   }
 
@@ -221,6 +240,20 @@ class Listing {
     }
 
     return $filters;
+
+  }
+
+  public function searchCompile($data) {
+
+    $searches = [];
+
+    for ($i = 1; $i != 100; $i++) {
+      if (isset($data['search'.$i])) {
+        $searches[] = $data['search'.$i];
+      }
+    }
+
+    return $searches;
 
   }
 
