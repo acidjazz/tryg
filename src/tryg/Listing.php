@@ -91,6 +91,7 @@ class Listing {
     $query = $this->filterRegex($query);
     $query = $this->filterIs($query);
     $query = $this->filterIn($query);
+    $query = $this->filterAll($query);
     $query = $this->filterExists($query);
 
     $result = $this->get($query, $sort, $this->limit, $skip);
@@ -114,10 +115,10 @@ class Listing {
 
   public function search($query) {
 
-    foreach ($this->searches as $search) {
+    foreach ($this->searches as $i=>$search) {
       foreach ($this->searchable as $field) {
         $regex = new \MongoRegex('/'.preg_quote($search).'/i');
-        $query['$or'][][$field] = ['$regex' => $regex];
+        $query['$and'][$i]['$or'][][$field] = ['$regex' => $regex];
       }
     }
 
@@ -185,6 +186,23 @@ class Listing {
 
   }
 
+  public function filterAll($query) {
+
+    if (!isset($this->filterable['all'])) {
+      return $query;
+    }
+
+    foreach ($this->filterable['all'] as $name=>$field) {
+
+      if (isset($this->filters[$name])) {
+        $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
+        $query['$and'][][$field] = ['$all' => $filters];
+      }
+    }
+
+    return $query;
+
+  }
 
   public function filterExists($query) {
 
