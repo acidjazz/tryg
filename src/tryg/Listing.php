@@ -99,6 +99,7 @@ class Listing {
     $this->options = [
       'filterable' => $this->filterable,
       'filters' => $this->filters,
+      'searches' => $this->searches,
       'query' => $query,
       'sort' => $sort,
       'limit' => $this->limit,
