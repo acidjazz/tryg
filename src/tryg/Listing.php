@@ -29,7 +29,7 @@ class Listing {
     $model = '\mdl\\'.$this->model;
 
     if ($limit == 1) {
-      return (new $model($model::findOne($query)))->data();
+      return (new $model($model::findOne($query)))->data(true);
     }
 
     $all = $model::find($query)->sort($sort);
@@ -39,7 +39,7 @@ class Listing {
     $docs = [];
     foreach ($cursor as $doc) {
       $modeled = new $model($doc);
-      $docs[$modeled->id(true)] = $modeled->data(false);
+      $docs[$modeled->id(true)] = $modeled->data(true);
     }
 
     $this->count = count($docs);
