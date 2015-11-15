@@ -1,4 +1,4 @@
-<?
+<?php
 
 /* mongoDB simple active record layer */
 
