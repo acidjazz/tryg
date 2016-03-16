@@ -29,7 +29,7 @@ class Stylus {
 
     $data = file_get_contents($path.$stylus);
 
-    $result = Node::post('stylus', 'http://localhost:3000/', $options, $data);
+    $result = Node::post('stylus', 'http://localhost:4200/', $options, $data);
 
     if ($result['status'] == 500) {
 

@@ -1,6 +1,6 @@
 
 /**
- * local jade delivery via localhost web port 3000
+ * local jade delivery via localhost web port 4200
  */
 
 var fs = require('fs');
@@ -59,4 +59,4 @@ http.createServer(function(req, res) {
 
   });
 
-}).listen(3000);
+}).listen(4200);

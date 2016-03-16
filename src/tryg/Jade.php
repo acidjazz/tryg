@@ -40,7 +40,7 @@ class Jade {
       return false;
     }
 
-    $result = Node::post('jade', 'http://localhost:3000/', ['file' => $file], $array);
+    $result = Node::post('jade', 'http://localhost:4200/', ['file' => $file], $array);
 
     if ($result['status'] == 500) {
 
