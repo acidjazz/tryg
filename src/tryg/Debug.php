@@ -59,7 +59,7 @@ class Debug {
 
       } else {
 
-        self::$html = Jade::c('Debug', ['errors' => self::$errors], true);
+        self::$html = Pug::c('Debug', ['errors' => self::$errors], true);
         echo self::$html;
 
       }

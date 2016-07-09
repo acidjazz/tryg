@@ -1,10 +1,10 @@
 
 /**
- * local jade delivery via localhost web port 4200
+ * local pug delivery via localhost web port 4200
  */
 
 var fs = require('fs');
-var jade = require('jade');
+var pug = require('pug');
 var stylus = require('stylus');
 var http = require('http');
 var path = require('path');
@@ -27,9 +27,9 @@ http.createServer(function(req, res) {
 
     var post = JSON.parse(body);
 
-    if (post.module == 'jade') {
+    if (post.module == 'pug') {
 
-      jade.renderFile(post.options.file, post.data, function(error, output) {
+      pug.renderFile(post.options.file, post.data, function(error, output) {
         if (error) {
           res.writeHead(500, {'Content-Type': 'text/html'});
           res.end(error.message); 

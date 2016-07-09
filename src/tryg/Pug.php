@@ -2,7 +2,7 @@
 
 namespace tryg;
 
-class Jade {
+class Pug {
 
   public static $templatedir = '/tpl/';
 
@@ -24,7 +24,7 @@ class Jade {
     }
 
     if (!is_file($path.$template) && !is_file($tryg.$template)) {
-      $template = $template.'.jade';
+      $template = $template.'.pug';
     }
 
     $file = false;
@@ -40,17 +40,17 @@ class Jade {
       return false;
     }
 
-    $result = Node::post('jade', 'http://localhost:4200/', ['file' => $file], $array);
+    $result = Node::post('pug', 'http://localhost:4200/', ['file' => $file], $array);
 
     if ($result['status'] == 500) {
 
       if (preg_match('/on line ([0-9]+)/i', $result['data'], $matches)) {
-        Debug::handler(E_ERROR, '[Jade] '.$result['data'], $path.$template, $matches[1]);
+        Debug::handler(E_ERROR, '[Pug] '.$result['data'], $path.$template, $matches[1]);
       } elseif (preg_match('/^(.*?):([0-9]+)/i', $result['data'], $matches)) {
         $lines = explode("\n", trim($result['data']));
-        Debug::handler(E_ERROR, '[Jade] '.end($lines), $matches[1], $matches[2]);
+        Debug::handler(E_ERROR, '[Pug] '.end($lines), $matches[1], $matches[2]);
       } else {
-        trigger_error("<b>[Jade]</b> compilation error: <pre>".$result['data']."</pre>");
+        trigger_error("<b>[Pug]</b> compilation error: <pre>".$result['data']."</pre>");
       }
 
       return false;

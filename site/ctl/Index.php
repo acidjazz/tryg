@@ -8,7 +8,7 @@ class Index {
   }
 
   public function index() {
-    \tryg\Jade::c('index');
+    \tryg\Pug::c('index');
   }
 
 }
