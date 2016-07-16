@@ -19,7 +19,7 @@ class Pug {
     $array['pretty'] = true;
     $array['self'] = true;
 
-    foreach (array('s' => isset($_SESSION) ? $_SESSION : array(), 'g' => $_GET, 'p' => $_POST, 'r' => $_REQUEST) as $k=>$v) {
+    foreach (['s' => isset($_SESSION) ? $_SESSION : [], 'g' => $_GET, 'p' => $_POST, 'r' => $_REQUEST] as $k=>$v) {
       $array['_'.$k] = $v;
     }
 

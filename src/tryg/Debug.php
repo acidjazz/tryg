@@ -10,24 +10,24 @@ class Debug {
 
   const MAX_ERRORS = 10;
 
-	private static $_etypes = [
-		E_ERROR							=> 'Error',
-		E_WARNING						=> 'Warning',
-		E_PARSE							=> 'Parsing Error',
-		E_NOTICE        	  => 'Notice',
-		E_CORE_ERROR				=> 'Core Error',
-		E_CORE_WARNING			=> 'Core Warning',
-		E_COMPILE_ERROR			=> 'Compile Error',
-		E_COMPILE_WARNING		=> 'Compile Warning',
-		E_USER_ERROR				=> 'User Error',
-		E_USER_WARNING			=> 'User Warning',
-		E_USER_NOTICE  		  => 'User Notice',
-		E_STRICT        	  => 'Runtime Notice',
-		E_RECOVERABLE_ERROR => 'Recoverable Error',
-		E_DEPRECATED				=> 'Deprecated',
-		E_USER_DEPRECATED		=> 'User Deprecated',
-		420									=> 'KDB'
-	];
+  private static $_etypes = [
+    E_ERROR							=> 'Error',
+    E_WARNING						=> 'Warning',
+    E_PARSE							=> 'Parsing Error',
+    E_NOTICE        	  => 'Notice',
+    E_CORE_ERROR				=> 'Core Error',
+    E_CORE_WARNING			=> 'Core Warning',
+    E_COMPILE_ERROR			=> 'Compile Error',
+    E_COMPILE_WARNING		=> 'Compile Warning',
+    E_USER_ERROR				=> 'User Error',
+    E_USER_WARNING			=> 'User Warning',
+    E_USER_NOTICE  		  => 'User Notice',
+    E_STRICT        	  => 'Runtime Notice',
+    E_RECOVERABLE_ERROR => 'Recoverable Error',
+    E_DEPRECATED				=> 'Deprecated',
+    E_USER_DEPRECATED		=> 'User Deprecated',
+    420									=> 'KDB'
+  ];
 
   public static function shutdown() {
 
@@ -60,7 +60,12 @@ class Debug {
       } else {
 
         self::$html = Pug::c('Debug', ['errors' => self::$errors], true);
-        echo self::$html;
+
+        if (self::$html == false) {
+          hpr(self::$errors);
+        } else {
+          echo self::$html;
+        }
 
       }
 
@@ -90,7 +95,7 @@ class Debug {
 
     $code = [];
 
-	  for ($i = (($line-self::$window < 1) ? 1 : $line-self::$window); $i != $line+self::$window; $i++) {
+    for ($i = (($line-self::$window < 1) ? 1 : $line-self::$window); $i != $line+self::$window; $i++) {
 
       if (isset($lines[$i])) {
         $code[$i+1] = $lines[$i];
