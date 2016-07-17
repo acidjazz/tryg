@@ -9,8 +9,6 @@ class Listing {
   public $filters = [];
   public $searches = [];
 
-  public $corrine = false;
-
   protected $model = false;
   private $class = false;
 
