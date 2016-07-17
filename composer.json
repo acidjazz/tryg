@@ -22,5 +22,10 @@
   },
   "require": {
     "php": ">=5.5"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "npm install --prefix ./vendor/acidjazz/tryg/src/tryg/srv/"
+    ]
   }
 }
