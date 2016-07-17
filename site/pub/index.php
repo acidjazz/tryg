@@ -1,6 +1,6 @@
 <?
 
-$loader = require '../../vendor/autoload.php';
+$loader = require '../vendor/autoload.php';
 $loader->setPsr4('ctl\\', '../ctl/');
 
 set_error_handler(['\tryg\Debug', 'handler'], E_ALL);
