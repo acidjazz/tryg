@@ -25,7 +25,7 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "npm install --prefix ./vendor/acidjazz/tryg/src/tryg/srv/"
+      "npm install --prefix ./src/tryg/srv/"
     ]
   }
 }
