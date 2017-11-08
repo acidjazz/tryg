@@ -16,23 +16,23 @@ class Model {
   public function __construct($id=null) {
 
     // model matching data passed in
-    if (is_array($id) && count($id) > 0) {
-      $this->_data = $id;
-    } else if(is_object($id) && ($id instanceof \MongoId)) {
+    if (is_object($id) && ($id instanceof MongoDB\Model\BSONDocument)) {
+      $this->_data = (array) $id;
+    } else if(is_object($id) && ($id instanceof \MongoDB\BSON\ObjectId)) {
     // mongoid has been passed in
-      $this->_data = self::col()->findOne(array('_id' => $id));
+      $this->_data = (array) self::col()->findOne(array('_id' => $id));
     } else if (is_string($id) && strlen($id) == 24) {
       // non-mongo mongoid has been passed in, try it out
-      $this->_data = self::col()->findOne(array('_id' => new \MongoId($id)));
+      $this->_data = (array) self::col()->findOne(array('_id' => new \MongoDB\BSON\ObjectId($id)));
     } else {
       // custom mongoid string passed in, one more shot
-      $this->_data = self::col()->findOne(array('_id' => $id));
+      $this->_data = (array) self::col()->findOne(array('_id' => $id));
     }
 
     if (is_array($this->_data) && count($this->_data) > 0) {
       $this->_exists = true;
     } elseif ($id != null) {
-      $this->_data['_id'] = $id;
+      $this->_data = (array) $id;
     }
 
   }
@@ -72,6 +72,8 @@ class Model {
       return $data['auth']['mongo'];
     }
 
+    print_r($data['auth']);
+
     foreach ($data['auth']['mongo'] as $key=>$db) {
 
       if (in_array(self::getcol(), $db['cols'])) {
@@ -90,9 +92,9 @@ class Model {
       $dbinfo = self::getdb();
 
       if (isset($dbinfo['replicaSet'])) {
-        $mongo = new \MongoClient($dbinfo['host'], array('replicaSet' => $dbinfo['replicaSet']));
+        $mongo = new \MongoDB\Client($dbinfo['host'], array('replicaSet' => $dbinfo['replicaSet']));
       } else {
-        $mongo = new \MongoClient($dbinfo['host']);
+        $mongo = new \MongoDB\Client($dbinfo['host']);
       }
 
       self::$_db = $mongo->{$dbinfo['db']};
@@ -146,22 +148,22 @@ class Model {
       switch ($this->_types[$name]) {
 
         case 'id' :
-          if (is_object($value) && ($value instanceof \MongoId)) {
+          if (is_object($value) && ($value instanceof \MongoDB\BSON\ObjectId)) {
             return $this->_data[$name] = $value;
           } else {
-            return $this->_data[$name] = new \MongoID($value);
+            return $this->_data[$name] = new \MongoDB\BSON\ObjectId($value);
           }
 
         case 'date' :
-          if (is_object($value) && ($value instanceof \MongoDate)) {
+          if (is_object($value) && ($value instanceof \MongoDB\BSON\UTCDateTime)) {
             return $this->_data[$name] = $value;
           } else {
-            return $this->_data[$name] = new \MongoDate($value);
+            return $this->_data[$name] = new \MongoDB\BSON\UTCDateTime($value);
           }
 
         case 'binary' :
-          if (is_object($value) && ($value instanceof \MongoDate)) {
-            return $this->_data[$name] = new \MongoBinData($value);
+          if (is_object($value) && ($value instanceof \MongoDB\BSON\UTCDateTime)) {
+            return $this->_data[$name] = new \MongoDB\BSON\Binary($value);
           } else {
             return $this->_data[$name] = $value;
           }
@@ -212,10 +214,12 @@ class Model {
     $data = $this->_data;
 
     if ($ols === true && isset($this->_ols) && is_array($this->_ols)) {
+
       foreach ($this->_ols as $ol) {
         $data[$ol] = $this->$ol;
       }
     }
+
 
     return $data;
 
@@ -228,7 +232,7 @@ class Model {
    }
 
    if ($raw) {
-     return $this->_data['_id']->{'$id'};
+     return $this->_data['_id']->__toString();
    }
 
    return $this->_data['_id'];
