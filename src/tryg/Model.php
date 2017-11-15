@@ -122,8 +122,8 @@ class Model {
   }
 
   public function __get($name) {
-    if (is_array($this->_data) && array_key_exists($name, $this->_data)) {
-      return $this->_data[$name];
+    if (is_object($this->_data) && array_key_exists($name, $this->_data)) {
+      return $this->_data->$name;
     }
   }
 
@@ -186,7 +186,7 @@ class Model {
       }
     }
 
-    return self::col()->save($this->_data,$options);
+    return self::col()->replaceOne(['_id' => $this->id()], $this->_data, $options);
 
   }
 
