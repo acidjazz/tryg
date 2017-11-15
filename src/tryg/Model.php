@@ -186,7 +186,15 @@ class Model {
       }
     }
 
-    return self::col()->replaceOne(['_id' => $this->id()], $this->_data, $options);
+    if ($this->id() === false) {
+      if (array_key_exists(0, $this->_data)) {
+        $this->_data['_id'] = $this->_data[0];
+        unset($this->_data[0]);
+      }
+      return self::col()->insertOne($this->_data, $options);
+    } else {
+      return self::col()->replaceOne(['_id' => $this->id()], $this->_data, $options);
+    }
 
   }
 
