@@ -116,7 +116,7 @@ class Listing {
 
     foreach ($this->searches as $i=>$search) {
       foreach ($this->searchable as $field) {
-        $regex = new \MongoDB\BSON\Regex('/'.preg_quote($search).'/i');
+        $regex = new \MongoDB\BSON\Regex(preg_quote($search),'i');
         $query['$and'][$i]['$or'][][$field] = ['$regex' => $regex];
       }
     }
@@ -136,7 +136,7 @@ class Listing {
       if (isset($this->filters[$name])) {
         $filters = is_array($this->filters[$name]) ? $this->filters[$name] : [$this->filters[$name]];
         foreach ($filters as $filter) {
-          $regex = new \MongoDB\BSON\Regex('/'.preg_quote($filter).'/i');
+          $regex = new \MongoDB\BSON\Regex(preg_quote($filter),'i');
           $query['$and'][][$field] = ['$regex' => $regex];
         }
       }
