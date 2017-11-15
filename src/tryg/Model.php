@@ -122,8 +122,8 @@ class Model {
   }
 
   public function __get($name) {
-    if (is_object($this->_data) && array_key_exists($name, $this->_data)) {
-      return $this->_data->$name;
+    if ( (is_object($this->_data) || is_array($this->_data)) && array_key_exists($name, $this->_data)) {
+      return ((array) $this->_data)[$name];
     }
   }
 
@@ -220,8 +220,7 @@ class Model {
       }
     }
 
-
-    return $data;
+    return (array) $data;
 
   }
 
