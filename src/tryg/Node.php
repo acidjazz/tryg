@@ -31,7 +31,7 @@ class Node  {
   }
 
   public static function checkProcess() {
-    exec('pgrep -lf "node_web.js" | grep -v pgrep', $output, $return);
+    exec('pgrep -lf "node_web.js" | grep -vf pgrep', $output, $return);
     if (count($output) < 1) {
       return false;
     }
