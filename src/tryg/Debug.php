@@ -135,8 +135,8 @@ class Debug {
   }
 
   public static function rootPath() {
-    $path = substr($_SERVER['DOCUMENT_ROOT'], 0, strrpos($_SERVER['DOCUMENT_ROOT'], '/'));
-    return $path;
+    // rtrim makes sure there is no trailing slash.
+    return realpath(rtrim($_SERVER['DOCUMENT_ROOT'],DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..');
   }
 
   // slurp a bunch of json and yaml from a directory
